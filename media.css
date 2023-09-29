@@ -1,0 +1,31 @@
+@media screen and (max-width: 400px) {
+    .wrapper {
+      /* background-color: lightgreen; */
+    }
+
+    .modal .inputBox input, .modal .inputBox .optBox{
+        width: 125px;
+    }
+
+    .modal .inputBox select{
+        width: 125px;
+    }
+    .modal .inputBox label{
+        font-size: 14px;
+    }
+    .modal .outputBox span{
+        font-size: 14px;
+    }
+    .modal h1{
+        font-size: 25px;
+    }
+
+    .themeSelector{
+        min-width: 120px;
+        min-height: 35px;
+    }
+    .themeSelector span{
+        height: 24px;
+        width: 24px;
+    }
+  }

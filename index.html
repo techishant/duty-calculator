@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Duty Amount Calculator</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="media.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="numName.js"></script>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="themeSelector" id="themeSelector">
+        </div>
+        <div class="modal" id ="photo">
+            <h1>Duty Calculator </h1>
+            <div class="inputBox">
+                <label for="CIvalue">CI Value<span id = "curr">(USD)</span></span></label>
+                <input type="number" name="" value = "100" id="CIvalue">
+            </div>
+            <div class="inputBox">
+                <label for="rateValue">Exchange Rate </label>
+                <input type="number" name="" value = "85" id="rateValue">
+            </div>
+            
+            <div class="inputBox">
+                <label for="freightValue">Freight</label>
+                <input type="number" name="" value = "10" id="freightValue">
+            </div>
+
+            <div class="inputBox">
+                <label for="BCDrate">BCD</label>
+                <select name="" value = "0" id="BCDrate" >
+                </select>
+            </div>
+
+            <div class="inputBox">
+                <label>GST</label>
+                <div class="optBox">
+                    <label for="gst_12">12%</label>
+                    <input type="radio" name="GSToption" id="gst_12" value = "12" >
+                    <label for="gst_18">18%</label>
+                    <input type="radio" name="GSToption" id="gst_18" value = "18" checked>
+                </div>
+            </div>
+            <hr class="hor-bar">
+
+            <div class="outputBox">
+                <span>INR Value: <span id="INRvalue"></span></span>
+                <span>Freight: <span id="FreightFinalValue"></span></span>
+                <span>Insurance: <span id="insuranceValue"></span></span>
+                <span>Total: <span id="totalValue"></span></span>
+                <hr>
+                <span>BCD: <span id="BCDvalue"></span></span>
+                <span>SW: <span id="SWvalue"></span></span>
+                <span>GST: <span id="gstAmtVal"></span></span>
+                <hr>
+                <span>Duty Payable Amount: <span id="amtValue"></span></span>
+                <button id="genPDFbtn">Export PDF</button>
+            </div>
+        </div>
+    </div>
+    <!-- <div id="imgOutput"></div> -->
+    <script src="export.js"></script>
+    <script src="scripts.js"></script>
+    <script src="designScript.js"></script>
+    <!-- <script src= "https://cdn.jsdelivr.net/npm/html2canvas@1.0.0-rc.5/dist/html2canvas.min.js"></script> -->
+</body>
+</html>
