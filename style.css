@@ -80,6 +80,8 @@
     font-family: 'Poppins';
     border-radius: 0px;
     outline: none;
+    
+    margin-left: 10px;
 }
 
 .modal .inputBox input:focus{
