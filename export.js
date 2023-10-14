@@ -42,7 +42,7 @@ function exportAsPDF() {
     doc.text(`Rupees ${getWord(amt)} only.`, 20, 450)
 
     let currentDateAndTime = new Date();
-    let out = `${currentDateAndTime.getDate()}-${currentDateAndTime.getMonth()}-${currentDateAndTime.getFullYear()} | ${currentDateAndTime.getHours()}:${currentDateAndTime.getMinutes()}:${currentDateAndTime.getSeconds()}`;
+    let out = `${currentDateAndTime.getDate()}-${currentDateAndTime.getMonth()+1}-${currentDateAndTime.getFullYear()} | ${currentDateAndTime.getHours()}:${currentDateAndTime.getMinutes()}:${currentDateAndTime.getSeconds()}`;
 
     doc.line(10, 470, 585, 470);
     doc.text(out, 20, 481);
