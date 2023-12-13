@@ -3,6 +3,8 @@ class Duty{
         this.name = null;
         this.freight = null;
 
+        this.curr = "USD";
+
         this.gst = null;
         
         this.r = null;
@@ -16,6 +18,7 @@ class Duty{
         this.sw = null;
         this.gstAmt = null;
         this.amt = null;
+        this.bcd_rate = null;
     }
 
     // input

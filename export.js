@@ -1,5 +1,5 @@
 
-function exportAsPDF() {
+function exportAsPDF(duty) {
     const doc = new window.jspdf.jsPDF({
         unit: "pt",
         orientation: "p",
@@ -15,7 +15,7 @@ function exportAsPDF() {
     doc.setFontSize(14);
     doc.autoTable({
         startY: 100,
-        body: getRows(),
+        body: getRows(duty),
         styles: {
             lineColor: [0, 0, 0],
             lineWidth: 0.2,
@@ -39,7 +39,7 @@ function exportAsPDF() {
 
 
     doc.setFontSize(12);
-    doc.text(`Rupees ${getWord(amt)} only.`, 20, 450)
+    doc.text(`Rupees ${getWord(duty.amt)} only.`, 20, 450)
 
     let currentDateAndTime = new Date();
     let out = `${currentDateAndTime.getDate()}-${currentDateAndTime.getMonth() + 1}-${currentDateAndTime.getFullYear()} | ${currentDateAndTime.getHours()}:${currentDateAndTime.getMinutes()}:${currentDateAndTime.getSeconds()}`;
@@ -47,26 +47,30 @@ function exportAsPDF() {
     doc.line(10, 470, 585, 470);
     doc.text(out, 20, 481);
 
+    // doc.addPage(); For a future project
+    doc.line(10, 470, 585, 470);
+
     doc.save();
 }
 
-function getRows() {
+function getRows(duty) {
     let rows = []
 
-    rows.push([`CI Value ${curr.innerText}`, ci]);
-    rows.push(["Exchange Rate", r]);
-    rows.push(["Freight", fr]);
-    rows.push(["BCD(%)", `${BCD_rate}%`]);
-    rows.push(["INR Value", inr]);
-    rows.push(["Insurance", insurance]);
-    rows.push(["Total", total]);
-    rows.push(["BCD", BCD]);
-    rows.push(["SW", SW]);
-    rows.push(["GST", gstAmt]);
-    rows.push(["Duty Payable Amount", amt]);
+    rows.push([`Names `, duty.name]);
+    rows.push([`CI Value ${duty.curr}`, duty.ci]);
+    rows.push(["Exchange Rate", duty.r]);
+    rows.push(["Freight", duty.fr]);
+    rows.push(["BCD(%)", `${duty.bcd_rate}%`]);
+    rows.push(["INR Value", duty.inr]);
+    rows.push(["Insurance", duty.insurance]);
+    rows.push(["Total", duty.total]);
+    rows.push(["BCD", duty.bcd]);
+    rows.push(["SW", duty.sw]);
+    rows.push(["GST", duty.gstAmt]);
+    rows.push(["Duty Payable Amount", duty.amt]);
     return rows;
 }
 
 
 const exportBtn = document.getElementById("genPDFbtn");
-exportBtn.addEventListener('click', exportAsPDF);
+exportBtn.addEventListener('click', () => exportAsPDF(duty1));

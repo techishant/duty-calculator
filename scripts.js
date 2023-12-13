@@ -59,6 +59,7 @@ for (i = 0; i < BCD_Rates_List.length; i++) {
 curr.addEventListener('click', function () {
     if (curr.innerText == "(EUR)") curr.innerText = "(USD)";
     else curr.innerText = "(EUR)";
+    calculateValues();
 });
 
 let isFRupdated = false;
@@ -77,6 +78,9 @@ function updateCI_rate() {
 calculateValues();
 
 function calculateValues(){
+
+    duty1.curr = curr.innerText;
+
     duty1.name = DutyName.value;
     duty1.inputCI$R(CIvalue.value, rateValue.value);
     /**
