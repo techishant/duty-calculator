@@ -1,9 +1,11 @@
+
 // INPUT
 const CIvalue = document.getElementById('CIvalue');
 const rateValue = document.getElementById('rateValue');
 const freightValue = document.getElementById('freightValue');
 const select_BCD_rate = document.getElementById("BCDrate");
 const GSTval = document.getElementsByName('GSToption');
+const DutyName = document.getElementById('dutyName');
 
 //OUTPUT
 const INRvalue = document.getElementById('INRvalue');
@@ -18,6 +20,7 @@ const gstAmtValue = document.getElementById("gstAmtVal");
 // EUR Or USD
 const currLabel = document.getElementById('curr');
 
+const duty1 = new Duty();
 
 let ci, r, fr, BCD_rate;
 let inr = 0;
@@ -37,6 +40,7 @@ var BCD_Rates_List = [10, 15, 20, 25];
 CIvalue.addEventListener('input', updateCI_rate);
 rateValue.addEventListener('input', updateCI_rate);
 freightValue.addEventListener('input', updateFreight);
+DutyName.addEventListener('input', calculateValues);
 for (i = 0; i < GSTval.length; i++) {
     GSTval[i].addEventListener('input', calculateValues);
 }
@@ -72,55 +76,57 @@ function updateCI_rate() {
 
 calculateValues();
 
+function calculateValues(){
+    duty1.name = DutyName.value;
+    duty1.inputCI$R(CIvalue.value, rateValue.value);
+    /**
+     * this.inr = this.ci * this.r
+     */
+    duty1.calculateINRvalue();
 
-
-function calculateValues() {
-    // intializing
-    r = parseFloat(rateValue.value);
-    ci = parseFloat(CIvalue.value);
-
-    inr = Math.round(ci * r);
 
     if (isupdateCI_rate) {
-        freightValue.value = Math.round(20 / 100.0 * inr);
+        duty1.calculateFrValue();
+        freightValue.value =  duty1.getFr();
         isupdateCI_rate = false;
     }
-
+    
     if (isFRupdated == false) {
-        freightValue.value = Math.round(20 / 100.0 * inr);
+        duty1.calculateFrValue();
+        freightValue.value = duty1.getFr();
         isFRupdated = true;
     }
-    fr = parseFloat(freightValue.value);
 
+    duty1.calculateFrValue(parseFloat(freightValue.value));
 
-    BCD_rate = parseFloat(select_BCD_rate.value);
-    insurance = Math.round(1.125 / 100 * inr);
+    duty1.calculateInsurance();
+    duty1.bcd_rate = parseFloat(select_BCD_rate.value);
 
-    total = Math.round(inr + fr + insurance);
+    duty1.calculateTotal();
 
-    BCD = Math.round(BCD_rate / 100.0 * total);
-    SW = Math.round(10 / 100 * BCD);
+    duty1.calculateBCDandSW();
 
     for (i = 0; i < GSTval.length; i++) {
         if (GSTval[i].checked) {
-            gst = parseFloat(GSTval[i].value);
+            duty1.gst = parseFloat(GSTval[i].value);
             break;
         }
     }
 
-    gstAmt = Math.round(gst / 100.0 * (BCD + SW + total));
-    amt = Math.round(BCD + SW + gstAmt);
+    duty1.calculateGstAndAmount();
+
+    flipForm();
+}
 
 
-
-    INRvalue.innerText = `₹${inr}`;
-    freightFinalValue.innerText = `₹${fr}`;
-    insuranceValue.innerText = `₹${insurance}`;
-    totalValue.innerText = `₹${total}`;
-    BCDvalue.innerText = `₹${BCD}`;
-    SWvalue.innerText = `₹${SW}`;
-    amtValue.innerText = `₹${amt}`;
-    gstAmtValue.innerText = `₹${gstAmt}`;
-
+function flipForm(){
+    INRvalue.innerText = `₹${duty1.inr}`;
+    freightFinalValue.innerText = `₹${duty1.fr}`;
+    insuranceValue.innerText = `₹${duty1.insurance}`;
+    totalValue.innerText = `₹${duty1.total}`;
+    BCDvalue.innerText = `₹${duty1.bcd}`;
+    SWvalue.innerText = `₹${duty1.sw}`;
+    amtValue.innerText = `₹${duty1.amt}`;
+    gstAmtValue.innerText = `₹${duty1.gstAmt}`;
 }
 
