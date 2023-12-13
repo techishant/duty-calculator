@@ -24,56 +24,84 @@
 
 <body>
     <div class="wrapper">
-        <div class="themeSelector" id="themeSelector">
-        </div>
-        <div class="modal" id="photo">
-            <h1>Duty Calculator </h1>
-            <div class="inputBox">
-                <label for="dutyName">Name</label>
-                <input type="text" name="" placeholder="Enter Name" id="dutyName">
-            </div>
-            <div class="inputBox">
-                <label for="CIvalue">CI Value<span id="curr">(USD)</span></span></label>
-                <input type="number" name="" value="100" id="CIvalue">
-            </div>
-            <div class="inputBox">
-                <label for="rateValue">Exchange Rate </label>
-                <input type="number" name="" value="85" id="rateValue">
-            </div>
 
-            <div class="inputBox">
-                <label for="freightValue">Freight</label>
-                <input type="number" name="" value="10" id="freightValue">
-            </div>
+        <!-- theme selector panel -->
+        <div class="themeSelector" id="themeSelector"></div>
 
-            <div class="inputBox">
-                <label for="BCDrate">BCD</label>
-                <select name="" value="0" id="BCDrate">
-                </select>
-            </div>
+        <!-- main form or card -->
 
-            <div class="inputBox">
-                <label>GST</label>
-                <div class="optBox">
-                    <label for="gst_12">12%</label>
-                    <input type="radio" name="GSToption" id="gst_12" value="12">
-                    <label for="gst_18">18%</label>
-                    <input type="radio" name="GSToption" id="gst_18" value="18" checked>
+        <div class="card-wrapper">
+            <div class="card">
+                <h1>Duty Calculator </h1>
+                <div class="inputBox">
+                    <label for="dutyName">Name</label>
+                    <input type="text" name="" placeholder="Enter Name" id="dutyName">
+                </div>
+                <div class="inputBox">
+                    <label for="CIvalue">CI Value<span id="curr">(USD)</span></span></label>
+                    <input type="number" name="" value="100" id="CIvalue">
+                </div>
+                <div class="inputBox">
+                    <label for="rateValue">Exchange Rate </label>
+                    <input type="number" name="" value="85" id="rateValue">
+                </div>
+
+                <div class="inputBox">
+                    <label for="freightValue">Freight</label>
+                    <input type="number" name="" value="10" id="freightValue">
+                </div>
+
+                <div class="inputBox">
+                    <label for="BCDrate">BCD</label>
+                    <select name="" value="0" id="BCDrate">
+                    </select>
+                </div>
+
+                <div class="inputBox">
+                    <label>GST</label>
+                    <div class="optBox">
+                        <label for="gst_12">12%</label>
+                        <input type="radio" name="GSToption" id="gst_12" value="12">
+                        <label for="gst_18">18%</label>
+                        <input type="radio" name="GSToption" id="gst_18" value="18" checked>
+                    </div>
+                </div>
+                <hr class="hor-bar">
+
+                <div class="outputBox">
+                    <span>INR Value: <span id="INRvalue"></span></span>
+                    <span>Freight: <span id="FreightFinalValue"></span></span>
+                    <span>Insurance: <span id="insuranceValue"></span></span>
+                    <span>Total: <span id="totalValue"></span></span>
+                    <hr>
+                    <span>BCD: <span id="BCDvalue"></span></span>
+                    <span>SW: <span id="SWvalue"></span></span>
+                    <span>GST: <span id="gstAmtVal"></span></span>
+                    <hr>
+                    <span>Duty Payable Amount: <span id="amtValue"></span></span>
                 </div>
             </div>
-            <hr class="hor-bar">
+        </div>
 
-            <div class="outputBox">
-                <span>INR Value: <span id="INRvalue"></span></span>
-                <span>Freight: <span id="FreightFinalValue"></span></span>
-                <span>Insurance: <span id="insuranceValue"></span></span>
-                <span>Total: <span id="totalValue"></span></span>
-                <hr>
-                <span>BCD: <span id="BCDvalue"></span></span>
-                <span>SW: <span id="SWvalue"></span></span>
-                <span>GST: <span id="gstAmtVal"></span></span>
-                <hr>
-                <span>Duty Payable Amount: <span id="amtValue"></span></span>
+        <!-- the side list panel -->
+        <div class="panel">
+            <h1>List</h1>
+            <ul>
+                <li class="selected">
+                    <span class="name">HARDWARE</span>
+                    <span>SW: 3190</span>
+                    <span>GST: 3190</span>
+                    <span>Duty Payable Amount: 3190</span>
+
+                    <span class="action-panel">
+                        <button>Delete</button>
+                        <button>Edit</button>
+                    </span>
+                </li>
+            </ul>
+
+            <div class="toolbar">
+                <!-- <button id="genPDFbtn">New Duty</button> -->
                 <button id="genPDFbtn">Export PDF</button>
             </div>
         </div>

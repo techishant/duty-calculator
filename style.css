@@ -12,11 +12,13 @@
 }
 
 .wrapper {
-    height: 100vh;
+    min-height: 100vh;
     width: 100%;
     background: var(--acc-color);
-    display: grid;
-    place-items: center;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row;
     position: relative;
 }
 
@@ -48,7 +50,7 @@
     transform: scale(1.1);
 }
 
-.modal {
+.card {
     /* height: 600px; */
     max-width: 400px;
     background: white;
@@ -58,25 +60,25 @@
     box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
 }
 
-.modal h1 {
+.card h1 {
     font-family: 'Poppins';
     font-size: 40px;
     font-weight: bolder;
 }
 
-.modal .inputBox {
+.card .inputBox {
     display: flex;
     padding-bottom: 12px;
     align-items: center;
     justify-content: space-between;
 }
 
-.modal .inputBox label {
+.card .inputBox label {
     font-family: 'Poppins';
     font-size: 20px;
 }
 
-.modal .inputBox input {
+.card .inputBox input {
     outline: none;
     border: 1px solid grey;
     height: 28px;
@@ -89,11 +91,11 @@
     margin-left: 10px;
 }
 
-.modal .inputBox input:focus {
+.card .inputBox input:focus {
     border-color: var(--acc-color);
 }
 
-.modal .inputBox select {
+.card .inputBox select {
     height: 28px;
     width: 165px;
     font-family: "Poppins";
@@ -101,21 +103,21 @@
     outline: none;
 }
 
-.modal .inputBox select option:checked {
+.card .inputBox select option:checked {
     background: var(--acc-color);
     color: white;
     font-weight: 3px;
 }
 
-.modal .inputBox select option:focus {
+.card .inputBox select option:focus {
     background-color: red;
 }
 
-.modal .inputBox select:focus {
+.card .inputBox select:focus {
     border-color: var(--acc-color);
 }
 
-.modal .inputBox .optBox {
+.card .inputBox .optBox {
     width: 165px;
     display: flex;
     justify-content: space-around;
@@ -123,33 +125,160 @@
     align-items: center;
 }
 
-.modal .inputBox .optBox input {
+.card .inputBox .optBox input {
     width: 16px;
 }
 
-.modal .inputBox .optBox label {
+.card .inputBox .optBox label {
     font-size: 16px;
 }
 
 
 /* OUTPUT BOX  */
-.modal .outputBox span {
+.card .outputBox span {
     font-family: 'Poppins';
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
 
-.modal .outputBox span span {
+.card .outputBox span span {
     font-family: 'Poppins';
     display: inline-block;
     font-weight: bold;
     margin-right: 0%;
 }
 
-.modal .outputBox #genPDFbtn {
+
+.card-wrapper{
+    /* background: red; */
+    height: 100vh;
+    width: 80%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.panel{
+    font-family: 'Poppins';
+    background: white;
+    display: flex;
+    align-items: baseline;
+    flex-direction: column;
+
+    height: 100vh;
+    overflow: hidden;
+    min-width: 20%;
+    z-index: 0;
+}
+
+.panel h1{
+    text-align: center;
+    display: block;
+    width: 100%;
+    border-bottom: 2px solid var(--acc-color);
+    /* background: red; */
+}
+
+.panel ul{
+    /* background: green; */
+    display: block;
+    height: 100%;
+    width: 100%;
+    overflow: auto;
+}
+
+.panel ul li{
+    display: block;
+    text-decoration: none;
+    list-style: none;
+    margin: 5px;
+    padding: 7px;
+    min-height: 60px;
+    border-radius: 7px;
+    position: relative;
+    cursor: pointer;
+}
+
+.panel ul li::before{
+    content: '';
+    position: absolute;
+    display: block;
+    background: var(--acc-color);
+    height: 100%;
+    width: 100%;
+    opacity: 10%;
+    border-radius: 7px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: -99;    
+}
+
+.panel ul li:hover::before{
+    opacity: 100%;
+}
+
+.panel ul li:hover{
+    color: white;
+    border: 2px solid white !important;
+}
+
+.panel ul li:hover .action-panel{
+    display: block;
+}
+
+.panel ul li.selected{
+    border: 2px solid var(--acc-color);
+}
+
+.panel ul li span:first-child{
+    font-weight: 900;
+    font-size: 18px;
+}
+
+.panel ul li span{
+    font-size: 15px;
+}
+
+.panel ul li span{
+    display: block;
+}
+
+.panel ul li .action-panel{
+    padding: 2px 5px;
+    display: none;
+}
+
+.panel ul li .action-panel button{
+    font-family: inherit;
+    cursor: pointer;
+    border: 1px solid white;
+    padding: 4px;
+    background: white;
+    border-radius: 4px;
+}
+
+.panel ul li button:first-child:hover{
+    background: rgb(152, 6, 6);
+    color: white;
+}
+.panel ul li button:last-child:hover{
+    background: rgb(6, 152, 28);
+    color: white;
+}
+
+.panel .toolbar {
+    display: block;
+    width: 100%;
+    height: fit-content;
+    padding: 10px;
+    border-top: 2px solid var(--acc-color);
+}
+
+.panel .toolbar button {
     font-family: Poppins;
-    margin-top: 20px;
+    margin-top: 5px;
     height: 40px;
     width: 100%;
     background: var(--acc-color);
