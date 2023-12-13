@@ -29,7 +29,7 @@ let BCD = 0;
 let SW = 0;
 let amt = 0;
 let gst = 0;
-let gstAmt  = 0;
+let gstAmt = 0;
 
 
 var BCD_Rates_List = [10, 15, 20, 25];
@@ -37,14 +37,14 @@ var BCD_Rates_List = [10, 15, 20, 25];
 CIvalue.addEventListener('input', updateCI_rate);
 rateValue.addEventListener('input', updateCI_rate);
 freightValue.addEventListener('input', updateFreight);
-for(i = 0; i<GSTval.length; i++){
+for (i = 0; i < GSTval.length; i++) {
     GSTval[i].addEventListener('input', calculateValues);
 }
 select_BCD_rate.addEventListener('change', calculateValues);
 
 // Adding those options to DOM throgh JS
 let opt;
-for(i = 0; i<BCD_Rates_List.length; i++){
+for (i = 0; i < BCD_Rates_List.length; i++) {
     opt = document.createElement("option")
     opt.value = BCD_Rates_List[i];
     opt.innerText = `${BCD_Rates_List[i]}%`;
@@ -52,20 +52,20 @@ for(i = 0; i<BCD_Rates_List.length; i++){
 }
 
 // Fixing EUR and USD
-curr.addEventListener('click', function(){
-    if(curr.innerText == "(EUR)") curr.innerText = "(USD)";
-    else  curr.innerText = "(EUR)";
+curr.addEventListener('click', function () {
+    if (curr.innerText == "(EUR)") curr.innerText = "(USD)";
+    else curr.innerText = "(EUR)";
 });
 
 let isFRupdated = false;
 let isupdateCI_rate = false;
-function updateFreight(){
+function updateFreight() {
     // fr = freightValue.value
     isFRupdated = true;
     calculateValues();
 }
 
-function updateCI_rate(){
+function updateCI_rate() {
     isupdateCI_rate = true;
     calculateValues();
 }
@@ -74,41 +74,41 @@ calculateValues();
 
 
 
-function calculateValues(){
+function calculateValues() {
     // intializing
     r = parseFloat(rateValue.value);
     ci = parseFloat(CIvalue.value);
 
     inr = Math.round(ci * r);
 
-    if(isupdateCI_rate){
-        freightValue.value = Math.round(20/100.0 * inr);
-        isupdateCI_rate = false;    
+    if (isupdateCI_rate) {
+        freightValue.value = Math.round(20 / 100.0 * inr);
+        isupdateCI_rate = false;
     }
 
-    if(isFRupdated == false){
-        freightValue.value = Math.round(20/100.0 * inr);
+    if (isFRupdated == false) {
+        freightValue.value = Math.round(20 / 100.0 * inr);
         isFRupdated = true;
     }
     fr = parseFloat(freightValue.value);
-    
+
 
     BCD_rate = parseFloat(select_BCD_rate.value);
-    insurance = Math.round(1.125/100 * inr);
+    insurance = Math.round(1.125 / 100 * inr);
 
     total = Math.round(inr + fr + insurance);
 
-    BCD = Math.round(BCD_rate/100.0 * total);
-    SW = Math.round(10/100 * BCD);
+    BCD = Math.round(BCD_rate / 100.0 * total);
+    SW = Math.round(10 / 100 * BCD);
 
-    for(i = 0; i<GSTval.length; i++){
-        if(GSTval[i].checked) {
+    for (i = 0; i < GSTval.length; i++) {
+        if (GSTval[i].checked) {
             gst = parseFloat(GSTval[i].value);
             break;
         }
     }
 
-    gstAmt = Math.round(gst/100.0 * (BCD+SW+total));
+    gstAmt = Math.round(gst / 100.0 * (BCD + SW + total));
     amt = Math.round(BCD + SW + gstAmt);
 
 

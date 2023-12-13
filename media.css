@@ -1,31 +1,36 @@
 @media screen and (max-width: 400px) {
     .wrapper {
-      /* background-color: lightgreen; */
+        /* background-color: lightgreen; */
     }
 
-    .modal .inputBox input, .modal .inputBox .optBox{
+    .modal .inputBox input,
+    .modal .inputBox .optBox {
         width: 125px;
     }
 
-    .modal .inputBox select{
+    .modal .inputBox select {
         width: 125px;
     }
-    .modal .inputBox label{
+
+    .modal .inputBox label {
         font-size: 14px;
     }
-    .modal .outputBox span{
+
+    .modal .outputBox span {
         font-size: 14px;
     }
-    .modal h1{
+
+    .modal h1 {
         font-size: 25px;
     }
 
-    .themeSelector{
+    .themeSelector {
         min-width: 120px;
         min-height: 35px;
     }
-    .themeSelector span{
+
+    .themeSelector span {
         height: 24px;
         width: 24px;
     }
-  }
+}
