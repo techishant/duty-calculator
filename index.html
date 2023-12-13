@@ -35,7 +35,8 @@
                 <h1>Duty Calculator </h1>
                 <div class="inputBox">
                     <label for="dutyName">Name</label>
-                    <input type="text" name="" placeholder="Enter Name" id="dutyName">
+                    <select name="" value="0" id="dutyNameSelector">
+                    </select>
                 </div>
                 <div class="inputBox">
                     <label for="CIvalue">CI Value<span id="curr">(USD)</span></span></label>
@@ -86,8 +87,8 @@
         <!-- the side list panel -->
         <div class="panel">
             <h1>List</h1>
-            <ul>
-                <li class="selected">
+            <ul id="BillsList">
+                <!-- <li class="selected">
                     <span class="name">HARDWARE</span>
                     <span>SW: 3190</span>
                     <span>GST: 3190</span>
@@ -97,11 +98,11 @@
                         <button>Delete</button>
                         <button>Edit</button>
                     </span>
-                </li>
+                </li> -->
             </ul>
 
             <div class="toolbar">
-                <!-- <button id="genPDFbtn">New Duty</button> -->
+                <button id="newDutyBtn">New Duty</button>
                 <button id="genPDFbtn">Export PDF</button>
             </div>
         </div>
