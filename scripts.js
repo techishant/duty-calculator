@@ -38,7 +38,7 @@ const duty_name_list = ["HARDWARE", "NON-HARDWARE", "OTHERS"];
 // Create new duty
 newDutyBtn.addEventListener('click', () => {
     billsList.push(new Duty());
-    currentDuty = billsList.length-1;
+    currentDuty = billsList.length - 1;
     resetForm();
     calculateValues();
 });
@@ -48,7 +48,7 @@ CIvalue.addEventListener('input', whenCI_Rate_or_exchangeRateUpdates);
 rateValue.addEventListener('input', whenCI_Rate_or_exchangeRateUpdates);
 freightValue.addEventListener('input', updateFreight);
 // GST val is a radio button pair. So, gst val is getElementsByName
-for (i = 0; i < GSTval.length; i++) {
+for (let i = 0; i < GSTval.length; i++) {
     GSTval[i].addEventListener('input', calculateValues);
 }
 
@@ -60,17 +60,17 @@ dutyNameSelector.addEventListener('change', calculateValues);
 let opt;
 
 // duty name options
-for (i = 0; i < duty_name_list.length; i++) {
-    opt = document.createElement("option")
+for (let i = 0; i < duty_name_list.length; i++) {
+    opt = document.createElement("option");
     opt.value = duty_name_list[i];
-    opt.innerText = `${duty_name_list[i]}   `;
+    opt.innerText = `${duty_name_list[i]}`;
     dutyNameSelector.appendChild(opt);
 }
 
 // BCD Rates options
 opt = null;
 for (i = 0; i < BCD_Rates_List.length; i++) {
-    opt = document.createElement("option")
+    opt = document.createElement("option");
     opt.value = BCD_Rates_List[i];
     opt.innerText = `${BCD_Rates_List[i]}%`;
     select_BCD_rate.appendChild(opt);
@@ -149,7 +149,7 @@ function calculateValues() {
     billsList[currentDuty].calculateGstAndAmount();
 
     flipOutputs();
-    updateList()
+    updateList();
 }
 
 
@@ -173,6 +173,7 @@ function flipOutputs() {
  * corresponding to the current selected duty
  */
 function flipForm() {
+    console.log("Flip Index: " + currentDuty);
     dutyNameSelector.value = billsList[currentDuty].name;
     CIvalue.value = billsList[currentDuty].ci;
     curr.innerText = billsList[currentDuty].curr;
@@ -198,7 +199,7 @@ function resetForm() {
     CIvalue.value = 100;
     rateValue.value = 85;
     select_BCD_rate.value = 10;
-    console.log(select_BCD_rate.value);
+    // console.log(select_BCD_rate.value);
     GSTval[1].checked = true;
     calculateValues();
     freightValue.value = billsList[currentDuty].getFr()
@@ -224,27 +225,53 @@ function changeCurrentDuty(newDutyIndex) {
  * Updates the list Panel
  */
 function updateList() {
-    console.log(billsList);
+    // console.log(billsList);
     let item;
     BillsListPanel.innerHTML = "";
     for (let j = 0; j < billsList.length; j++) {
         item = document.createElement("li");
         item.classList.remove("selected");
         item.classList = (currentDuty === j) ? "selected" : "";
-        item.innerHTML = `<span class="name">${billsList[j].name}</span>
+        item.innerHTML = `
+        <div class="info-panel">
+        <span class="name">${billsList[j].name}</span>
         <span>SW: ${billsList[j].sw}</span>
         <span>GST: ${billsList[j].gstAmt}</span>
         <span>Duty Payable Amount: ${billsList[j].amt}</span>
+        </div>
 
         <span class="action-panel">
-            <button>Delete</button>
-            <button>Edit</button>
+            <button onclick="deleteDuty(${j})">Delete</button>
         </span>`;
 
-        item.addEventListener("click", () => {
-            console.log(j)
-            changeCurrentDuty(j);
+        item.getElementsByClassName('info-panel')[0].addEventListener("click", () => {
+            if (currentDuty != j) {
+                // console.log(j);
+                changeCurrentDuty(j);
+            }
         });
         BillsListPanel.append(item);
     }
+}
+
+
+function deleteElement(target) {
+    if (target == 0 && billsList.length == 1) {
+        resetForm();
+        return;
+    }
+    for (let i = target; i < billsList.length - 1; i++) {
+        billsList[i] = billsList[i + 1];
+    }
+    billsList = billsList.slice(0, billsList.length - 1);
+    console.log("Bills: " + billsList + "  |  " + target);
+    if (target == 0) changeCurrentDuty(target + 1);
+    else if (target == billsList.length) changeCurrentDuty(target - 1);
+    else changeCurrentDuty(target);
+}
+
+
+function deleteDuty(index) {
+    if(confirm("Delete Permanently? "))
+    deleteElement(index);
 }

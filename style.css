@@ -150,7 +150,7 @@
 }
 
 
-.card-wrapper{
+.card-wrapper {
     /* background: red; */
     height: 100vh;
     width: 80%;
@@ -159,7 +159,7 @@
     justify-content: center;
 }
 
-.panel{
+.panel {
     font-family: 'Poppins';
     background: white;
     display: flex;
@@ -172,7 +172,7 @@
     z-index: 0;
 }
 
-.panel h1{
+.panel h1 {
     text-align: center;
     display: block;
     width: 100%;
@@ -180,7 +180,7 @@
     /* background: red; */
 }
 
-.panel ul{
+.panel ul {
     /* background: green; */
     display: block;
     height: 100%;
@@ -188,19 +188,23 @@
     overflow: auto;
 }
 
-.panel ul li{
+.panel ul li {
     display: block;
     text-decoration: none;
     list-style: none;
     margin: 5px;
     padding: 7px;
+    padding-bottom: 7px;
     min-height: 60px;
     border-radius: 7px;
     position: relative;
+}
+
+.panel .info-panel {
     cursor: pointer;
 }
 
-.panel ul li::before{
+.panel ul li::before {
     content: '';
     position: absolute;
     display: block;
@@ -212,56 +216,59 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    z-index: -99;    
+    z-index: -99;
 }
 
-.panel ul li:hover::before{
+.panel ul li:hover::before {
     opacity: 20%;
 }
 
-.panel ul li:hover .action-panel{
+.panel ul li:hover .action-panel {
     display: block;
 }
 
-.panel ul li.selected{
+.panel ul li.selected {
     border: 2px solid var(--acc-color);
 }
 
-.panel ul li span:first-child{
+.panel ul li span:first-child {
     font-weight: 900;
     font-size: 18px;
 }
 
-.panel ul li span{
+.panel ul li span {
     font-size: 15px;
 }
 
-.panel ul li span{
+.panel ul li span {
     display: block;
 }
 
-.panel ul li .action-panel{
-    padding: 2px 5px;
+.panel ul li .action-panel {
+    padding: 4px 5px 5px 0px;
     display: none;
 }
 
-.panel ul li .action-panel button{
+.panel ul li .action-panel button {
     font-family: inherit;
     cursor: pointer;
     border: 1px solid white;
     padding: 4px;
     background: white;
     border-radius: 4px;
+    height: 30px;
+    width: 100%;
 }
 
-.panel ul li button:first-child:hover{
+.panel ul li button:first-child:hover {
     background: rgb(152, 6, 6);
     color: white;
 }
-.panel ul li button:last-child:hover{
+
+/* .panel ul li button:last-child:hover {
     background: rgb(6, 152, 28);
     color: white;
-}
+} */
 
 .panel .toolbar {
     display: block;
@@ -281,7 +288,7 @@
     border: 0;
     border-radius: 200px;
     cursor: pointer;
-}   
+}
 
 .hor-bar {
     background: var(--acc-color);
