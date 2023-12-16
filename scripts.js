@@ -179,10 +179,13 @@ function flipForm() {
     curr.innerText = billsList[currentDuty].curr;
     rateValue.value = billsList[currentDuty].r;
     freightValue.value = billsList[currentDuty].fr;
-    BCDvalue.value = billsList[currentDuty].bcd;
+    select_BCD_rate.value = `${billsList[currentDuty].bcd_rate}`;
+    console.log(billsList[currentDuty].gst);
     if (billsList[currentDuty].gst == 12) {
         GSTval[0].checked = true;
+        GSTval[1].checked = false;
     } else {
+        GSTval[1].checked = true;
         GSTval[0].checked = false;
     }
 
@@ -198,7 +201,7 @@ function resetForm() {
     dutyNameSelector.value = "HARDWARE";
     CIvalue.value = 100;
     rateValue.value = 85;
-    select_BCD_rate.value = 10;
+    select_BCD_rate.value = '10';
     // console.log(select_BCD_rate.value);
     GSTval[1].checked = true;
     calculateValues();
@@ -213,6 +216,7 @@ function resetForm() {
  * to change current duty
  */
 function changeCurrentDuty(newDutyIndex) {
+    console.log(billsList)
     currentDuty = newDutyIndex;
     updateList();
     flipForm();
@@ -255,6 +259,9 @@ function updateList() {
 }
 
 
+/**
+ * deletes an element from the arr billList
+ */
 function deleteElement(target) {
     if (target == 0 && billsList.length == 1) {
         resetForm();
@@ -270,8 +277,10 @@ function deleteElement(target) {
     else changeCurrentDuty(target);
 }
 
-
+/**
+ * function to ensure deletion and recieve onclick
+ */
 function deleteDuty(index) {
-    if(confirm("Delete Permanently? "))
+    if (confirm("Delete Permanently? "));
     deleteElement(index);
 }
