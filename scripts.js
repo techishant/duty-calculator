@@ -44,8 +44,8 @@ newDutyBtn.addEventListener('click', () => {
 });
 
 // Handling Inputs
-CIvalue.addEventListener('input', whenCI_Rate_or_exchangeRateUpdates());
-rateValue.addEventListener('input', whenCI_Rate_or_exchangeRateUpdates());
+CIvalue.addEventListener('input', whenCI_Rate_or_exchangeRateUpdates);
+rateValue.addEventListener('input', whenCI_Rate_or_exchangeRateUpdates);
 freightValue.addEventListener('input', updateFreight);
 // GST val is a radio button pair. So, gst val is getElementsByName
 for (i = 0; i < GSTval.length; i++) {
