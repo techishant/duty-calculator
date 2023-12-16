@@ -216,12 +216,7 @@
 }
 
 .panel ul li:hover::before{
-    opacity: 100%;
-}
-
-.panel ul li:hover{
-    color: white;
-    border: 2px solid white !important;
+    opacity: 20%;
 }
 
 .panel ul li:hover .action-panel{
@@ -286,7 +281,7 @@
     border: 0;
     border-radius: 200px;
     cursor: pointer;
-}
+}   
 
 .hor-bar {
     background: var(--acc-color);

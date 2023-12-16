@@ -1,4 +1,7 @@
 class Duty{
+    /**
+     * initializing the calculators
+     */
     constructor(){
         this.name = null;
         this.freight = null;
@@ -22,7 +25,6 @@ class Duty{
     }
 
     // input
-
     inputCI$R(ci,r){
         this.ci = ci;
         this.r = r;

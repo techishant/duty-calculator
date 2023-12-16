@@ -20,35 +20,46 @@ const gstAmtValue = document.getElementById("gstAmtVal");
 // EUR Or USD
 const currLabel = document.getElementById('curr');
 
+// buttons
 const newDutyBtn = document.getElementById("newDutyBtn");
 
 // LISTS
 const BillsListPanel = document.getElementById("BillsList");
 
+// The Bill List
 let billsList = Array(1).fill(new Duty());
+// storing the index of current duty selected and to be shown
 let currentDuty = 0;
 
-var BCD_Rates_List = [10, 15, 20, 25];
+// Arrays of Some constants
+const BCD_Rates_List = [10, 15, 20, 25];
 const duty_name_list = ["HARDWARE", "NON-HARDWARE", "OTHERS"];
 
+// Create new duty
 newDutyBtn.addEventListener('click', () => {
     billsList.push(new Duty());
-    currentDuty++;
+    currentDuty = billsList.length-1;
     resetForm();
     calculateValues();
 });
 
-
-CIvalue.addEventListener('input', updateCI_rate);
-rateValue.addEventListener('input', updateCI_rate);
+// Handling Inputs
+CIvalue.addEventListener('input', whenCI_Rate_or_exchangeRateUpdates());
+rateValue.addEventListener('input', whenCI_Rate_or_exchangeRateUpdates());
 freightValue.addEventListener('input', updateFreight);
+// GST val is a radio button pair. So, gst val is getElementsByName
 for (i = 0; i < GSTval.length; i++) {
     GSTval[i].addEventListener('input', calculateValues);
 }
+
+// Some dropdowns
 select_BCD_rate.addEventListener('change', calculateValues);
 dutyNameSelector.addEventListener('change', calculateValues);
 
+// Adding options to our dropDowns
 let opt;
+
+// duty name options
 for (i = 0; i < duty_name_list.length; i++) {
     opt = document.createElement("option")
     opt.value = duty_name_list[i];
@@ -56,8 +67,8 @@ for (i = 0; i < duty_name_list.length; i++) {
     dutyNameSelector.appendChild(opt);
 }
 
-// Adding those options to DOM throgh JS
-opt;
+// BCD Rates options
+opt = null;
 for (i = 0; i < BCD_Rates_List.length; i++) {
     opt = document.createElement("option")
     opt.value = BCD_Rates_List[i];
@@ -65,23 +76,32 @@ for (i = 0; i < BCD_Rates_List.length; i++) {
     select_BCD_rate.appendChild(opt);
 }
 
-// Fixing EUR and USD
+// Change Currency
 curr.addEventListener('click', function () {
     if (curr.innerText == "(EUR)") curr.innerText = "(USD)";
     else curr.innerText = "(EUR)";
     calculateValues();
 });
 
+// some conditions storing variables
 let isFRupdated = false;
-let isupdateCI_rate = false;
+let isCI_rate_or_exchangeRate_Update = false;
+
+/**
+ * to update Freight
+ * Note: Freight is automatically \
+ * calculated as well as can be changed by user
+ */
 function updateFreight() {
-    // fr = freightValue.value
     isFRupdated = true;
     calculateValues();
 }
 
-function updateCI_rate() {
-    isupdateCI_rate = true;
+/**
+ * perform Some action when CI_Rate_or_exchangeRateUpdates
+ */
+function whenCI_Rate_or_exchangeRateUpdates() {
+    isCI_rate_or_exchangeRate_Update = true;
     calculateValues();
 }
 
@@ -98,10 +118,10 @@ function calculateValues() {
     billsList[currentDuty].calculateINRvalue();
 
 
-    if (isupdateCI_rate) {
+    if (isCI_rate_or_exchangeRate_Update) {
         billsList[currentDuty].calculateFrValue();
         freightValue.value = billsList[currentDuty].getFr();
-        isupdateCI_rate = false;
+        isCI_rate_or_exchangeRate_Update = false;
     }
 
     if (isFRupdated == false) {
@@ -133,6 +153,10 @@ function calculateValues() {
 }
 
 
+/**
+ * update the output panels with the outputs 
+ * corresponding to the current selected duty
+ */
 function flipOutputs() {
     INRvalue.innerText = `₹${billsList[currentDuty].inr}`;
     freightFinalValue.innerText = `₹${billsList[currentDuty].fr}`;
@@ -144,6 +168,10 @@ function flipOutputs() {
     gstAmtValue.innerText = `₹${billsList[currentDuty].gstAmt}`;
 }
 
+/**
+ * to update the form(all the inputs)
+ * corresponding to the current selected duty
+ */
 function flipForm() {
     dutyNameSelector.value = billsList[currentDuty].name;
     CIvalue.value = billsList[currentDuty].ci;
@@ -159,18 +187,30 @@ function flipForm() {
 
 }
 
+/**
+ * completely resets the form(inputs)
+ * to inital state
+ * used when creating a new duty
+ */
 function resetForm() {
     curr.innerText = "(USD)";
     dutyNameSelector.value = "HARDWARE";
     CIvalue.value = 100;
     rateValue.value = 85;
-    BCDvalue.value = "10%";
+    select_BCD_rate.value = 10;
+    console.log(select_BCD_rate.value);
     GSTval[1].checked = true;
     calculateValues();
     freightValue.value = billsList[currentDuty].getFr()
+    // Flip output would automatically reset the
+    // outputs panel to default values as it will re-calculate
+    // all the values.
     flipOutputs();
 }
 
+/**
+ * to change current duty
+ */
 function changeCurrentDuty(newDutyIndex) {
     currentDuty = newDutyIndex;
     updateList();
@@ -180,6 +220,9 @@ function changeCurrentDuty(newDutyIndex) {
 }
 
 
+/**
+ * Updates the list Panel
+ */
 function updateList() {
     console.log(billsList);
     let item;
