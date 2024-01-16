@@ -12,7 +12,7 @@ const totalWeightValue = document.getElementById("constantTotalWeight");
 const exwCharge = document.getElementById("constantEXWcharges");
 
 //OUTPUT
-const INRvalue = document.getElementById("INRvalue");
+// const INRvalue = document.getElementById("INRvalue");
 const freightFinalValue = document.getElementById("FreightFinalValue");
 const insuranceValue = document.getElementById("insuranceValue");
 const totalValue = document.getElementById("totalValue");
@@ -38,7 +38,7 @@ let currentDuty = 0;
 
 // Arrays of Some constants
 const BCD_Rates_List = [10, 15, 20, 25];
-const duty_name_list = ["HARDWARE", "NON-HARDWARE", "OTHERS"];
+const duty_name_list = ["HARDWARE", "NON-HARDWARE", "ALUMINIUM PROFILE", "OTHERS"];
 
 // Create new duty
 newDutyBtn.addEventListener("click", () => {
@@ -208,7 +208,7 @@ function calculateValues() {
  */
 function flipOutputs() {
   miscValue.innerText = `₹${billsList[currentDuty].misc}`;
-  INRvalue.innerText = `₹${billsList[currentDuty].inr}`;
+  //   INRvalue.innerText = `₹${billsList[currentDuty].inr}`;
   freightFinalValue.innerText = `₹${billsList[currentDuty].fr}`;
   insuranceValue.innerText = `₹${billsList[currentDuty].insurance}`;
   totalValue.innerText = `₹${billsList[currentDuty].total}`;
@@ -336,4 +336,11 @@ function deleteDuty(index) {
   if (confirm("Delete Permanently? ")) {
     deleteElement(index);
   }
+}
+
+/**
+ * function to round off to 2 decimal places
+ */
+function round2(n) {
+  return Math.round(n * 100) / 100;
 }

@@ -102,7 +102,7 @@ function getRows(duty) {
   rows.push(["Exchange Rate", duty.r]);
   rows.push(["Freight", duty.fr]);
   rows.push(["BCD(%)", `${duty.bcd_rate}%`]);
-  rows.push(["INR Value", duty.inr]);
+  rows.push(["Assessable Value", duty.total]);
   rows.push(["Insurance", duty.insurance]);
   rows.push(["Total", duty.total]);
   rows.push(["BCD", duty.bcd]);
@@ -124,10 +124,10 @@ function getRowsForTotal(duty_list, doc) {
     t_gst += duty_list[i].gstAmt;
     t_amt += duty_list[i].amt;
   }
-  rows.push([`Total BCD `, t_bcd]);
-  rows.push([`Total SW `, t_sw]);
-  rows.push(["Total GST", t_gst]);
-  rows.push(["Total Amount", t_amt]);
+  rows.push([`Total BCD `, round2(t_bcd)]);
+  rows.push([`Total SW `, round2(t_sw)]);
+  rows.push(["Total GST", round2(t_gst)]);
+  rows.push(["Total Amount", round2(t_amt)]);
 
   doc.text(`Rupees ${getWord(t_amt)} only.`, 20, 450);
   return rows;

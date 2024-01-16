@@ -23,7 +23,7 @@ class Duty {
     this.inr = null;
     this.fr = null;
     this.insurance = null;
-    this.total = null;
+    this.total = null; // Assessable Value
     this.bcd = null;
     this.sw = null;
     this.gstAmt = null;
@@ -65,7 +65,7 @@ class Duty {
   }
 
   calculateMiscValue() {
-    this.misc = Math.round((Duty.exw / Duty.totalWeight) * this.weight);
+    this.misc = round2((Duty.exw / Duty.totalWeight) * this.weight);
   }
 
   calculateINRvalue() {
@@ -74,7 +74,7 @@ class Duty {
   calculateFrValue() {
     console.log("He got called");
     // this.fr = Math.round(20/100.0 * this.inr);
-    this.fr = Math.round((900 / Duty.totalWeight) * this.weight);
+    this.fr = round2((900 / Duty.totalWeight) * this.weight);
   }
   calculateFrValue(freight) {
     if (freight != undefined) {
@@ -83,20 +83,20 @@ class Duty {
     }
   }
   calculateInsurance() {
-    this.insurance = Math.round((1.125 / 100) * this.ci);
+    this.insurance = round2((1.125 / 100) * this.ci);
   }
   calculateTotal() {
-    this.total = Math.round(
+    this.total = round2(
       (this.ci + this.misc + this.fr + this.insurance) * Duty.r
     );
   }
   calculateBCDandSW() {
-    this.bcd = Math.round((this.bcd_rate / 100.0) * this.total);
-    this.sw = Math.round((10 / 100) * this.bcd);
+    this.bcd = round2((this.bcd_rate / 100.0) * this.total);
+    this.sw = round2((10 / 100) * this.bcd);
   }
 
   calculateGstAndAmount() {
-    this.gstAmt = Math.round(
+    this.gstAmt = round2(
       (this.gst / 100.0) * (this.bcd + this.sw + this.total)
     );
     this.amt = Math.round(this.bcd + this.sw + this.gstAmt);
@@ -105,6 +105,7 @@ class Duty {
   getFr() {
     // console.log(this.weight, Duty.totalWeight)
     // return Math.round(20/100.0 * this.inr);
-    return Math.round((900 / Duty.totalWeight) * this.weight);
+    return round2((900 / Duty.totalWeight) * this.weight);
   }
 }
+

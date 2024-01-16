@@ -21,32 +21,33 @@
   position: relative;
 }
 
+
 .themeSelector {
-  position: absolute;
-  min-height: 40px;
-  min-width: 200px;
-  width: auto;
-  display: flex;
-  background: white;
-  top: 0;
-  left: 0;
-  justify-content: space-evenly;
-  padding: 0px 10px 0px 10px;
-  column-gap: 12px;
-  align-items: center;
-  border-bottom-right-radius: 12px;
+    position: absolute;
+    min-height: 40px;
+    min-width: 200px;
+    width: auto;
+    display: flex;
+    background: white;
+    top: 0;
+    left: 0;
+    justify-content: space-evenly;
+    padding: 0px 10px 0px 10px;
+    column-gap: 12px;
+    align-items: center;
+    border-bottom-right-radius: 12px;
 }
 
 .themeSelector span {
-  height: 28px;
-  width: 28px;
-  border-radius: 100%;
-  cursor: pointer;
-  transition: all 0.2s cubic-bezier(0.075, 0.82, 0.165, 1);
+    height: 28px;
+    width: 28px;
+    border-radius: 100%;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.075, 0.82, 0.165, 1);
 }
 
 .themeSelector span:hover {
-  transform: scale(1.1);
+    transform: scale(1.1);
 }
 
 .card {
@@ -55,6 +56,7 @@
   background: white;
   border-radius: 15px;
   padding: 20px;
+  padding-top: 5px;
 
   box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
     rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
@@ -63,33 +65,33 @@
 
 .card h1 {
   font-family: "Poppins";
-  font-size: 40px;
+  font-size: 36px;
   font-weight: bolder;
 }
 
 .inputBox {
   display: flex;
-  padding-bottom: 12px;
+  padding-bottom: 1.1vh;
   align-items: center;
   justify-content: space-between;
 }
 
 .inputBox label {
   font-family: "Poppins";
-  font-size: 20px;
+  font-size: 2.5vh;
 }
 
 .inputBox input {
   outline: none;
   border: 1px solid grey;
-  height: 28px;
+  height: 4vh;
   padding: 3px;
   width: 165px;
   font-family: "Poppins";
   border-radius: 0px;
   outline: none;
-
   margin-left: 10px;
+  font-size: 2.2vh;
 }
 
 .inputBox input:focus {
@@ -97,11 +99,12 @@
 }
 
 .inputBox select {
-  height: 28px;
+  height: 4vh;
   width: 165px;
   font-family: "Poppins";
   border-radius: 0px;
   outline: none;
+  font-size: 2.2vh;
 }
 
 .inputBox select option:checked {
@@ -127,11 +130,12 @@
 }
 
 .inputBox .optBox input {
-  width: 16px;
+  width: 2.5vh;
 }
 
 .inputBox .optBox label {
-  font-size: 16px;
+  /* font-size: 16px; */
+  font-size: 2.2vh;
 }
 
 .inputBox .optBox input[type="radio"] {
@@ -143,6 +147,7 @@
   font-family: "Poppins";
   display: flex;
   align-items: center;
+  font-size: 2.2vh;
   justify-content: space-between;
 }
 
@@ -150,12 +155,15 @@
   font-family: "Poppins";
   display: inline-block;
   font-weight: bold;
+  font-size: 2.2vh;
   margin-right: 0%;
 }
 
 .card-wrapper {
   /* background: red; */
-  height: 100vh;
+  min-height: 100vh;
+  overflow-x: hidden;
+  overflow-y: auto;
   width: 80%;
   display: flex;
   align-items: center;
@@ -236,11 +244,11 @@
 
 .panel ul li span:first-child {
   font-weight: 900;
-  font-size: 18px;
+  font-size: 2.5vh;
 }
 
 .panel ul li span {
-  font-size: 15px;
+  font-size: 2.2vh;
 }
 
 .panel ul li span {
@@ -252,7 +260,7 @@
   display: none;
 }
 
-.panel ul li .action-panel button {
+.panel ul li .action-panel button{
   font-family: inherit;
   cursor: pointer;
   border: 1px solid white;
@@ -281,10 +289,11 @@
   border-top: 2px solid var(--acc-color);
 }
 
-.panel .toolbar button {
+.panel .toolbar button , .card button{
   font-family: Poppins;
   margin-top: 5px;
   height: 40px;
+  font-size: 1.7vh;
   width: 100%;
   background: var(--acc-color);
   color: white;
