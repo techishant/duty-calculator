@@ -61,10 +61,10 @@
                 <div class="inputBox">
                     <label>GST</label>
                     <div class="optBox">
-                        <label for="gst_12">12%</label>
-                        <input type="radio" name="GSToption" id="gst_12" value="12">
-                        <label for="gst_18">18%</label>
-                        <input type="radio" name="GSToption" id="gst_18" value="18" checked>
+                            <input type="radio" name="GSToption" id="gst_12" value="12">
+                            <label for="gst_12">12%</label>
+                            <input type="radio" name="GSToption" id="gst_18" value="18" checked>
+                            <label for="gst_18">18%</label>
                     </div>
                 </div>
 
@@ -74,6 +74,10 @@
                     <div class="inputBox">
                         <label for="constantTotalWeight">Total Weight</label>
                         <input type="number" value="21433" placeholder="Total Weight" id="constantTotalWeight" />
+                    </div>
+                    <div class="inputBox">
+                        <label for="constantTotalFreight">Total Freight</label>
+                        <input type="number" value="900" placeholder="Total Freight" id="constantTotalFreight" />
                     </div>
                     <div class="inputBox">
                         <label for="constantEXWcharges">EXW Charges</label>
@@ -101,7 +105,6 @@
                     <span>Duty Payable Amount: <span id="amtValue"></span></span>
                 </div>
                 
-                <hr class="hor-bar">
                 <button id="newDutyBtn">New Duty</button>
             </div>
         </div>

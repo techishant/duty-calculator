@@ -6,6 +6,7 @@ class Duty {
   static exw;
   static r; // exchange rate
   static totalWeight;
+  static totalFreight;
   constructor() {
     this.name = null;
     this.freight = null;
@@ -32,10 +33,11 @@ class Duty {
     this.ass_value = null;
   }
 
-  static inputConstants(exR, exwrate, tw) {
+  static inputConstants(exR, exwrate, tw, tf) {
     this.r = exR;
     this.exw = exwrate;
     this.totalWeight = tw;
+    this.totalFreight = tf;
   }
 
   static inputExchangeRate(exR) {
@@ -48,6 +50,9 @@ class Duty {
 
   static inputTotalWeight(tw) {
     this.totalWeight = tw;
+  }
+  static inputTotalFreight(tf) {
+    this.totalFreight = tf;
   }
 
   // input
@@ -72,13 +77,11 @@ class Duty {
     this.inr = this.ci * Duty.r;
   }
   calculateFrValue() {
-    console.log("He got called");
     // this.fr = Math.round(20/100.0 * this.inr);
-    this.fr = round2((900 / Duty.totalWeight) * this.weight);
+    this.fr = round2((Duty.totalFreight / Duty.totalWeight) * this.weight);
   }
   calculateFrValue(freight) {
     if (freight != undefined) {
-      console.log("I got called", freight);
       this.fr = freight;
     }
   }
@@ -103,9 +106,8 @@ class Duty {
   }
 
   getFr() {
-    // console.log(this.weight, Duty.totalWeight)
     // return Math.round(20/100.0 * this.inr);
-    return round2((900 / Duty.totalWeight) * this.weight);
+    return round2((Duty.totalFreight / Duty.totalWeight) * this.weight);
   }
 }
 

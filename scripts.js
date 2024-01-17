@@ -10,9 +10,9 @@ const weightValue = document.getElementById("weightVal");
 const rateValue = document.getElementById("rateValue");
 const totalWeightValue = document.getElementById("constantTotalWeight");
 const exwCharge = document.getElementById("constantEXWcharges");
+const totalFreightValue = document.getElementById("constantTotalFreight");
 
 //OUTPUT
-// const INRvalue = document.getElementById("INRvalue");
 const freightFinalValue = document.getElementById("FreightFinalValue");
 const insuranceValue = document.getElementById("insuranceValue");
 const totalValue = document.getElementById("totalValue");
@@ -48,11 +48,14 @@ newDutyBtn.addEventListener("click", () => {
   calculateValues();
 });
 
+// constant event
 rateValue.addEventListener("input", updateConstantsValues);
 exwCharge.addEventListener("input", updateConstantsValues);
 totalWeightValue.addEventListener("input", updateConstantsValues);
-weightValue.addEventListener("input", updateWeight);
+totalFreightValue.addEventListener("input", updateConstantsValues);
+
 // Handling Inputs
+weightValue.addEventListener("input", updateWeight);
 CIvalue.addEventListener("input", whenCI_Rate_or_exchangeRateUpdates);
 freightValue.addEventListener("input", updateFreight);
 // GST val is a radio button pair. So, gst val is getElementsByName
@@ -114,14 +117,13 @@ function updateConstantsValues() {
   Duty.inputConstants(
     parseFloat(rateValue.value),
     parseFloat(exwCharge.value),
-    parseFloat(totalWeightValue.value)
+    parseFloat(totalWeightValue.value),
+    parseFloat(totalFreightValue.value)
   );
 
   for (let i = 0; i < billsList.length; i++) {
     billsList[i].calculateMiscValue();
-    // console.log(">>>",billsList[i].getFr())
     billsList[i].fr = billsList[i].getFr();
-    // console.log(i, "->", billsList[i].fr)
     billsList[i].calculateTotal();
     billsList[i].calculateBCDandSW();
     billsList[i].calculateGstAndAmount();
@@ -133,7 +135,8 @@ function updateConstants() {
   Duty.inputConstants(
     parseFloat(rateValue.value),
     parseFloat(exwCharge.value),
-    parseFloat(totalWeightValue.value)
+    parseFloat(totalWeightValue.value),
+    parseFloat(totalFreightValue.value)
   );
 }
 
@@ -180,7 +183,6 @@ function calculateValues() {
   }
 
   billsList[currentDuty].calculateFrValue(parseFloat(freightValue.value));
-  console.log(billsList[currentDuty].getFr());
 
   billsList[currentDuty].calculateInsurance();
   billsList[currentDuty].bcd_rate = parseFloat(select_BCD_rate.value);
@@ -228,10 +230,8 @@ function flipForm() {
   weightValue.value = billsList[currentDuty].weight;
   CIvalue.value = billsList[currentDuty].ci;
   curr.innerText = billsList[currentDuty].curr;
-  console.log("(((", billsList[currentDuty].fr);
   freightValue.value = billsList[currentDuty].fr;
   select_BCD_rate.value = `${billsList[currentDuty].bcd_rate}`;
-  console.log(billsList[currentDuty].gst);
   if (billsList[currentDuty].gst == 12) {
     GSTval[0].checked = true;
     GSTval[1].checked = false;
@@ -255,7 +255,6 @@ function resetForm() {
   dutyNameSelector.value = "HARDWARE";
   CIvalue.value = 1861.66;
   select_BCD_rate.value = "10";
-  // console.log(select_BCD_rate.value);
   GSTval[1].checked = true;
   calculateValues();
   freightValue.value = billsList[currentDuty].getFr();
@@ -269,7 +268,6 @@ function resetForm() {
  * to change current duty
  */
 function changeCurrentDuty(newDutyIndex) {
-  console.log(billsList);
   currentDuty = newDutyIndex;
   updateList();
   flipForm();
@@ -280,7 +278,6 @@ function changeCurrentDuty(newDutyIndex) {
  * Updates the list Panel
  */
 function updateList() {
-  // console.log(billsList);
   let item;
   BillsListPanel.innerHTML = "";
   for (let j = 0; j < billsList.length; j++) {
@@ -303,7 +300,6 @@ function updateList() {
       .getElementsByClassName("info-panel")[0]
       .addEventListener("click", () => {
         if (currentDuty != j) {
-          // console.log(j);
           changeCurrentDuty(j);
         }
       });
@@ -323,7 +319,6 @@ function deleteElement(target) {
     billsList[i] = billsList[i + 1];
   }
   billsList = billsList.slice(0, billsList.length - 1);
-  console.log("Bills: " + billsList + "  |  " + target);
   if (target == 0) changeCurrentDuty(target + 1);
   else if (target == billsList.length) changeCurrentDuty(target - 1);
   else changeCurrentDuty(target);
