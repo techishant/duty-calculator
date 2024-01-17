@@ -21,6 +21,8 @@ const SWvalue = document.getElementById("SWvalue");
 const amtValue = document.getElementById("amtValue");
 const gstAmtValue = document.getElementById("gstAmtVal");
 const miscValue = document.getElementById("miscValue");
+const totalBillAmount = document.getElementById("totalBillAmount");
+const totalItems = document.getElementById("totalItems");
 
 // EUR Or USD
 const currLabel = document.getElementById("curr");
@@ -218,6 +220,18 @@ function flipOutputs() {
   SWvalue.innerText = `₹${billsList[currentDuty].sw}`;
   amtValue.innerText = `₹${billsList[currentDuty].amt}`;
   gstAmtValue.innerText = `₹${billsList[currentDuty].gstAmt}`;
+
+  //summation values
+  
+  totalBillAmount.innerHTML = `Total(${billsList.length}): <span>₹${calcualteTotalBillAmount()}</span>`;
+}
+
+function calcualteTotalBillAmount(){
+  let sum = 0;
+  for(let i = 0; i<billsList.length; i++){
+    sum+= billsList[i].amt;
+  }
+  return sum;
 }
 
 /**
